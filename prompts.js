@@ -15,7 +15,7 @@ module.exports = [
     when: answers => answers.import === 'full',
     type: 'confirm',
     name: 'customTheme',
-    message: 'Do you wish to overwrite Element Plus\'s SCSS variables?',
+    message: 'Do you want to overwrite the SCSS variables of Element Plus?',
     default: false,
   },
   {

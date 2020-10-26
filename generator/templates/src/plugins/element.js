@@ -1,4 +1,3 @@
-import Vue from 'vue'
 <%_ if (options.import === 'full') { _%>
 import ElementPlus from 'element-plus'
 <%_ if (options.customTheme) { _%>
@@ -9,10 +8,8 @@ import 'element-plus/lib/theme-chalk/index.css'
 <%_ if (options.lang !== 'zh-CN') { _%>
 import locale from 'element-plus/lib/locale/lang/<%= options.lang %>'
 
-Vue.use(Element, { locale })
 <%_ } else { _%>
 
-Vue.use(Element)
 <%_ } _%>
 <%_ } else { _%>
 import { Button } from 'element-plus'
@@ -25,3 +22,6 @@ locale.use(lang)
 
 Vue.use(Button)
 <%_ } _%>
+export default (app) => {
+  app.use(ElementPlus)
+}

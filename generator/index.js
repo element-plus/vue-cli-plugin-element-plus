@@ -7,7 +7,7 @@ module.exports = (api, opts, rootOptions) => {
     }
   })
 
-  api.injectImports(utils.getMain(), `import './plugins/element.js'`)
+  api.injectImports(api.entryFile, `import installElementPlus from './plugins/element.js'`)
 
   api.render({
     './src/plugins/element.js': './templates/src/plugins/element.js',
@@ -31,6 +31,20 @@ module.exports = (api, opts, rootOptions) => {
       }
     })
   }
+
+  api.afterInvoke(() => {
+    const { EOL } = require('os')
+    const fs = require('fs')
+    const contentMain = fs.readFileSync(api.resolve(api.entryFile), { encoding: 'utf-8' })
+    const lines = contentMain.split(/\r?\n/g)
+
+    const renderIndex = lines.findIndex(line => line.match(/createApp\(App\)\.mount\('#app'\)/))
+    lines[renderIndex] = `const app = createApp(App)`
+    lines[renderIndex + 1] = `installElementPlus(app)`
+    lines[renderIndex + 2] = `app.mount('#app')`
+
+    fs.writeFileSync(api.resolve(api.entryFile), lines.join(EOL), { encoding: 'utf-8' })
+  })
 
   api.onCreateComplete(() => {
     if (opts.import === 'partial') {
