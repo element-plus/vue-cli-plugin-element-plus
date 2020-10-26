@@ -1,0 +1,24 @@
+{
+  "name": "vue-cli-plugin-element-plus",
+  "version": "0.0.1",
+  "description": "vue-cli 4 plugin to add element plus",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/element-plus/vue-cli-plugin-element-plus.git"
+  },
+  "keywords": [
+    "element-plus",
+    "element",
+    "element-ui",
+    "vue",
+    "vue-cli",
+    "plugin",
+    "cli"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/element-plus/vue-cli-plugin-element-plus/issues"
+  },
+  "homepage": "https://github.com/element-plus/vue-cli-plugin-element-plus#readme"
+}
