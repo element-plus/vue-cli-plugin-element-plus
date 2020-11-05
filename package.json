@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-element-plus",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "vue-cli 4 plugin to add element plus",
   "main": "index.js",
   "repository": {
