@@ -3,7 +3,7 @@ module.exports = (api, opts, rootOptions) => {
 
   api.extendPackage({
     dependencies: {
-      'element-plus': 'latest'
+      'element-plus': '^1.0.0'
     }
   })
 
