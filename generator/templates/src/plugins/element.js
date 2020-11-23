@@ -9,7 +9,7 @@ import 'element-plus/lib/theme-chalk/index.css'
 import locale from 'element-plus/lib/locale/lang/<%= options.lang %>'
 <%_ } _%>
 <%_ } else { _%>
-import { Button } from 'element-plus'
+import { ElButton } from 'element-plus'
 <%_ if (options.lang !== 'en') { _%>
 import lang from 'element-plus/lib/locale/lang/<%= options.lang %>'
 import locale from 'element-plus/lib/locale'
@@ -26,6 +26,6 @@ export default (app) => {
   <%_ if (options.lang !== 'en') { _%>
   locale.use(lang)
   <%_ } _%>
-  app.use(Button)
+  app.use(ElButton)
   <%_ } _%>
 }
