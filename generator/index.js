@@ -38,10 +38,11 @@ module.exports = (api, opts, rootOptions) => {
     const contentMain = fs.readFileSync(api.resolve(api.entryFile), { encoding: 'utf-8' })
     const lines = contentMain.split(/\r?\n/g)
 
-    const renderIndex = lines.findIndex(line => line.match(/createApp\(App\)\.mount\('#app'\)/))
+    const renderIndex = lines.findIndex(line => line.match(/createApp\(App\)(\.use\(\w*\))*\.mount\('#app'\)/))
+    const renderContent = lines[renderIndex]
     lines[renderIndex] = `const app = createApp(App)`
     lines[renderIndex + 1] = `installElementPlus(app)`
-    lines[renderIndex + 2] = `app.mount('#app')`
+    lines[renderIndex + 2]  = renderContent.replace('createApp\(App\)','app')
 
     fs.writeFileSync(api.resolve(api.entryFile), lines.join(EOL), { encoding: 'utf-8' })
   })
