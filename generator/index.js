@@ -10,7 +10,7 @@ module.exports = (api, opts, rootOptions) => {
   api.injectImports(api.entryFile, `import installElementPlus from './plugins/element'`)
 
   api.render({
-    './src/plugins/element': './templates/src/plugins/element',
+    './src/plugins/element.js': './templates/src/plugins/element.js',
     './src/App.vue': './templates/src/App.vue'
   })
 
