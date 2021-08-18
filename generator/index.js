@@ -1,13 +1,16 @@
-module.exports = (api, opts, rootOptions) => {
+module.exports = (api, opts) => {
   const utils = require('./utils')(api)
 
   api.extendPackage({
     dependencies: {
-      'element-plus': '^1.0.2-beta.28'
+      'element-plus': '^1.0.2-beta.71'
     }
   })
 
-  api.injectImports(api.entryFile, `import installElementPlus from './plugins/element'`)
+  api.injectImports(api.entryFile, [
+    `import installElementPlus from './plugins/element.js'`,
+    `import locale from 'element-plus/lib/locale/lang/${opts.lang}.js'`
+  ])
 
   api.render({
     './src/plugins/element.js': './templates/src/plugins/element.js',
@@ -42,7 +45,15 @@ module.exports = (api, opts, rootOptions) => {
 
     if (renderIndex >= 0) {
       const renderContent = lines[renderIndex]
-      lines[renderIndex] = `const app = createApp(App)`
+      lines[renderIndex] = `const app = createApp({
+        render() {
+          return (
+            <ElConfigProvider locale={locale}>
+              <App />
+            </ElConfigProvider>
+          )
+        },
+      })`
       lines[renderIndex + 1] = `installElementPlus(app)`
       lines[renderIndex + 2]  = renderContent.replace('createApp\(App\)','app')
   
