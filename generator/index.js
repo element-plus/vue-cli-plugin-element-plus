@@ -39,12 +39,15 @@ module.exports = (api, opts, rootOptions) => {
     const lines = contentMain.split(/\r?\n/g)
 
     const renderIndex = lines.findIndex(line => line.match(/createApp\(App\)(\.use\(\w*\))*\.mount\(['"]#app['"]\)/))
-    const renderContent = lines[renderIndex]
-    lines[renderIndex] = `const app = createApp(App)`
-    lines[renderIndex + 1] = `installElementPlus(app)`
-    lines[renderIndex + 2]  = renderContent.replace('createApp\(App\)','app')
 
-    fs.writeFileSync(api.resolve(api.entryFile), lines.join(EOL), { encoding: 'utf-8' })
+    if (renderIndex >= 0) {
+      const renderContent = lines[renderIndex]
+      lines[renderIndex] = `const app = createApp(App)`
+      lines[renderIndex + 1] = `installElementPlus(app)`
+      lines[renderIndex + 2]  = renderContent.replace('createApp\(App\)','app')
+  
+      fs.writeFileSync(api.resolve(api.entryFile), lines.join(EOL), { encoding: 'utf-8' })   
+    }   
   })
 
   api.onCreateComplete(() => {
