@@ -1,3 +1,7 @@
+# Deprecated
+
+Since [Vue CLI](https://github.com/vuejs/vue-cli#status) is now in maintenance mode, this plugin is no longer supported.
+
 # vue-cli-plugin-element-plus
 Element Plus plugin for `@vue/cli` 4.5.
 
